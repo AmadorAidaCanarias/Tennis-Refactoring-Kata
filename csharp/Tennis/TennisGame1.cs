@@ -32,12 +32,13 @@ namespace Tennis
             var tempScore = 0;
             for (var i = 1; i < 3; i++)
             {
-                if (i == 1) tempScore = player1Score;
-                else
+                if (i != 1)
                 {
                     score += "-";
                     tempScore = player2Score;
                 }
+                else
+                    tempScore = player1Score;
 
                 switch (tempScore)
                 {
@@ -63,10 +64,21 @@ namespace Tennis
         {
             string score;
             var minusResult = player1Score - player2Score;
-            if (minusResult == 1) score = "Advantage player1";
-            else if (minusResult == -1) score = "Advantage player2";
-            else if (minusResult >= 2) score = "Win for player1";
-            else score = "Win for player2";
+            switch (minusResult)
+            {
+                case -1:
+                    score = "Advantage player2";
+                    break;
+                case 1:
+                    score = "Advantage player1";
+                    break;
+                case >= 2:
+                    score = "Win for player1";
+                    break;
+                default:
+                    score = "Win for player2";
+                    break;
+            }
             return score;
         }
 
