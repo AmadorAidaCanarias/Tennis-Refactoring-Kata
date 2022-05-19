@@ -11,6 +11,10 @@ namespace Tennis
         }
 
         public int Score { set; get; }
+
+        public void IncScore(int value) {
+            Score += value;
+        }
     }
 
     public class TennisGame1 : ITennisGame
@@ -28,9 +32,9 @@ namespace Tennis
         public void WonPoint(string playerName)
         {
             if (playerName == Player1Name)
-                player1.Score += 1;
+                player1.IncScore(1);
             else
-                player2.Score += 1;
+                player2.IncScore(1);
         }
 
         public string GetScore()
