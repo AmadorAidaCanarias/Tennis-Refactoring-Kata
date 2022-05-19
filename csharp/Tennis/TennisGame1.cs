@@ -18,7 +18,6 @@ namespace Tennis
 
     public class TennisGame1 : ITennisGame
     {
-        private const string Player1Name = "player1";
         private readonly Player player1;
         private readonly Player player2;
 
@@ -30,7 +29,7 @@ namespace Tennis
 
         public void WonPoint(string playerName)
         {
-            if (playerName == Player1Name)
+            if (playerName == player1.Name)
                 player1.IncScore(1);
             else
                 player2.IncScore(1);
