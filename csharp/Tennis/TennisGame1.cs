@@ -16,44 +16,27 @@ namespace Tennis
         }
     }
 
-    public class TennisGame1 : ITennisGame
+    public class ScoreBoard
     {
-        private readonly Player player1;
-        private readonly Player player2;
-
-        public TennisGame1(string player1Name, string player2Name)
+        public string CurrentScore(int player1Score, int player2Score)
         {
-            player1 = new Player(player1Name, 0);
-            player2 = new Player(player2Name, 0);
+            if (player1Score == player2Score)
+                return ScoreWhenAreEquals(player1Score);
+            if (player1Score >= 4 || player2Score >= 4)
+                return ScoreWhenAreDifferentsAndGreatterThan4(player1Score, player2Score);
+            return ScoreDefault("", player1Score, player2Score);
         }
 
-        public void WonPoint(string playerName)
-        {
-            if (playerName == player1.Name)
-                player1.IncScore(1);
-            else
-                player2.IncScore(1);
-        }
-
-        public string GetScore()
-        {
-            if (player1.Score == player2.Score)
-                return ScoreWhenAreEquals();
-            if (player1.Score >= 4 || player2.Score >= 4)
-                return ScoreWhenAreDifferentsAndGreatterThan4();
-            return ScoreDefault("");
-        }
-
-        private string ScoreDefault(string score)
+        private string ScoreDefault(string score, int player1Score, int player2Score)
         {
             var tempScore = 0;
             for (var i = 1; i < 3; i++)
             {
-                if (i == 1) tempScore = player1.Score;
+                if (i == 1) tempScore = player1Score;
                 else
                 {
                     score += "-";
-                    tempScore = player2.Score;
+                    tempScore = player2Score;
                 }
 
                 switch (tempScore)
@@ -76,10 +59,10 @@ namespace Tennis
             return score;
         }
 
-        private string ScoreWhenAreDifferentsAndGreatterThan4()
+        private string ScoreWhenAreDifferentsAndGreatterThan4(int player1Score, int player2Score)
         {
             string score;
-            var minusResult = player1.Score - player2.Score;
+            var minusResult = player1Score - player2Score;
             if (minusResult == 1) score = "Advantage player1";
             else if (minusResult == -1) score = "Advantage player2";
             else if (minusResult >= 2) score = "Win for player1";
@@ -87,10 +70,10 @@ namespace Tennis
             return score;
         }
 
-        private string ScoreWhenAreEquals()
+        private string ScoreWhenAreEquals(int currentScore)
         {
             string score;
-            switch (player1.Score)
+            switch (currentScore)
             {
                 case 0:
                     score = "Love-All";
@@ -107,6 +90,33 @@ namespace Tennis
             }
 
             return score;
+        }
+    }
+
+    public class TennisGame1 : ITennisGame
+    {
+        private readonly Player player1;
+        private readonly Player player2;
+        private readonly ScoreBoard scoreBoard;
+
+        public TennisGame1(string player1Name, string player2Name)
+        {
+            player1 = new Player(player1Name, 0);
+            player2 = new Player(player2Name, 0);
+            scoreBoard = new ScoreBoard();
+        }
+
+        public void WonPoint(string playerName)
+        {
+            if (playerName == player1.Name)
+                player1.IncScore(1);
+            else
+                player2.IncScore(1);
+        }
+
+        public string GetScore()
+        {
+            return scoreBoard.CurrentScore(player1.Score, player2.Score);
         }
     }
 }
