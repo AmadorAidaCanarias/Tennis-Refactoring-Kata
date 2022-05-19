@@ -2,7 +2,6 @@ namespace Tennis
 {
     public class Player
     {
-        private int m_score1 = 0;
         private string player1Name;
 
         public Player(string player1Name)
@@ -10,11 +9,7 @@ namespace Tennis
             this.player1Name = player1Name;
         }
 
-        public int MScore1
-        {
-            set { m_score1 = value; }
-            get { return m_score1; }
-        }
+        public int Score { set; get; } = 0;
     }
 
     public class TennisGame1 : ITennisGame
@@ -33,7 +28,7 @@ namespace Tennis
         public void WonPoint(string playerName)
         {
             if (playerName == Player1)
-                player1.MScore1 += 1;
+                player1.Score += 1;
             else
                 m_score2 += 1;
         }
@@ -41,11 +36,11 @@ namespace Tennis
         public string GetScore()
         {
             string score = "";
-            if (player1.MScore1 == m_score2)
+            if (player1.Score == m_score2)
             {
                 score = ScoreWhenAreEquals();
             }
-            else if (player1.MScore1 >= 4 || m_score2 >= 4)
+            else if (player1.Score >= 4 || m_score2 >= 4)
             {
                 score = ScoreWhenAreDifferentsAndGreatterThan4();
             }
@@ -54,7 +49,7 @@ namespace Tennis
                 var tempScore = 0;
                 for (var i = 1; i < 3; i++)
                 {
-                    if (i == 1) tempScore = player1.MScore1;
+                    if (i == 1) tempScore = player1.Score;
                     else { score += "-"; tempScore = m_score2; }
                     switch (tempScore)
                     {
@@ -79,7 +74,7 @@ namespace Tennis
         private string ScoreWhenAreDifferentsAndGreatterThan4()
         {
             string score;
-            var minusResult = player1.MScore1 - m_score2;
+            var minusResult = player1.Score - m_score2;
             if (minusResult == 1) score = "Advantage player1";
             else if (minusResult == -1) score = "Advantage player2";
             else if (minusResult >= 2) score = "Win for player1";
@@ -90,7 +85,7 @@ namespace Tennis
         private string ScoreWhenAreEquals()
         {
             string score;
-            switch (player1.MScore1)
+            switch (player1.Score)
             {
                 case 0:
                     score = "Love-All";
