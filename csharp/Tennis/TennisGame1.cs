@@ -84,24 +84,17 @@ namespace Tennis
 
         private string ScoreWhenAreEquals(int currentScore)
         {
-            string score;
             switch (currentScore)
             {
                 case 0:
-                    score = "Love-All";
-                    break;
+                    return "Love-All";
                 case 1:
-                    score = "Fifteen-All";
-                    break;
+                    return "Fifteen-All";
                 case 2:
-                    score = "Thirty-All";
-                    break;
+                    return "Thirty-All";
                 default:
-                    score = "Deuce";
-                    break;
+                    return "Deuce";
             }
-
-            return score;
         }
     }
 
