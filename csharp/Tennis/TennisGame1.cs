@@ -4,12 +4,13 @@ namespace Tennis
     {
         public string Name;
 
-        public Player(string name)
+        public Player(string name, int score)
         {
             Name = name;
+            Score = score;
         }
 
-        public int Score { set; get; } = 0;
+        public int Score { set; get; }
     }
 
     public class TennisGame1 : ITennisGame
@@ -20,8 +21,8 @@ namespace Tennis
 
         public TennisGame1(string player1Name, string player2Name)
         {
-            player1 = new Player(player1Name);
-            player2 = new Player(player2Name);
+            player1 = new Player(player1Name, 0);
+            player2 = new Player(player2Name, 0);
         }
 
         public void WonPoint(string playerName)
