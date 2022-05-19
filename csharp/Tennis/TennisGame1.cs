@@ -37,18 +37,10 @@ namespace Tennis
         {
             string score = "";
             if (player1.Score == m_score2)
-            {
-                score = ScoreWhenAreEquals();
-            }
-            else if (player1.Score >= 4 || m_score2 >= 4)
-            {
-                score = ScoreWhenAreDifferentsAndGreatterThan4();
-            }
-            else
-            {
-                score = ScoreDefault(score);
-            }
-            return score;
+                return ScoreWhenAreEquals();
+            if (player1.Score >= 4 || m_score2 >= 4)
+                return ScoreWhenAreDifferentsAndGreatterThan4();
+            return ScoreDefault(score);
         }
 
         private string ScoreDefault(string score)
