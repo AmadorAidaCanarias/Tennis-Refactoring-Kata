@@ -2,11 +2,11 @@ namespace Tennis
 {
     public class Player
     {
-        private string player1Name;
+        public string Name;
 
-        public Player(string player1Name)
+        public Player(string name)
         {
-            this.player1Name = player1Name;
+            Name = name;
         }
 
         public int Score { set; get; } = 0;
@@ -14,31 +14,30 @@ namespace Tennis
 
     public class TennisGame1 : ITennisGame
     {
-        private const string Player1 = "player1";
-        private int m_score2 = 0;
-        private string player2Name;
+        private const string Player1Name = "player1";
         private readonly Player player1;
+        private readonly Player player2;
 
         public TennisGame1(string player1Name, string player2Name)
         {
             player1 = new Player(player1Name);
-            this.player2Name = player2Name;
+            player2 = new Player(player2Name);
         }
 
         public void WonPoint(string playerName)
         {
-            if (playerName == Player1)
+            if (playerName == Player1Name)
                 player1.Score += 1;
             else
-                m_score2 += 1;
+                player2.Score += 1;
         }
 
         public string GetScore()
         {
             string score = "";
-            if (player1.Score == m_score2)
+            if (player1.Score == player2.Score)
                 return ScoreWhenAreEquals();
-            if (player1.Score >= 4 || m_score2 >= 4)
+            if (player1.Score >= 4 || player2.Score >= 4)
                 return ScoreWhenAreDifferentsAndGreatterThan4();
             return ScoreDefault(score);
         }
@@ -52,7 +51,7 @@ namespace Tennis
                 else
                 {
                     score += "-";
-                    tempScore = m_score2;
+                    tempScore = player2.Score;
                 }
 
                 switch (tempScore)
@@ -78,7 +77,7 @@ namespace Tennis
         private string ScoreWhenAreDifferentsAndGreatterThan4()
         {
             string score;
-            var minusResult = player1.Score - m_score2;
+            var minusResult = player1.Score - player2.Score;
             if (minusResult == 1) score = "Advantage player1";
             else if (minusResult == -1) score = "Advantage player2";
             else if (minusResult >= 2) score = "Win for player1";
