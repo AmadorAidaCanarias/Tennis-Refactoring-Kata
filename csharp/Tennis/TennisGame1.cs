@@ -34,12 +34,11 @@ namespace Tennis
 
         public string GetScore()
         {
-            string score = "";
             if (player1.Score == player2.Score)
                 return ScoreWhenAreEquals();
             if (player1.Score >= 4 || player2.Score >= 4)
                 return ScoreWhenAreDifferentsAndGreatterThan4();
-            return ScoreDefault(score);
+            return ScoreDefault("");
         }
 
         private string ScoreDefault(string score)
