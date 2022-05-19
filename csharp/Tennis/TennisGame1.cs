@@ -10,7 +10,7 @@ namespace Tennis
             Score = score;
         }
 
-        public int Score { internal set; get; }
+        public int Score { private set; get; }
 
         public void IncScore(int value) {
             Score += value;
