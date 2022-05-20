@@ -23,7 +23,7 @@ namespace Tennis
             if (player1Score == player2Score)
                 return ScoreWhenAreEquals(player1Score);
             if (player1Score >= 4 || player2Score >= 4)
-                return ScoreWhenAreDifferentsAndGreatterThan4(player1Score, player2Score);
+                return ScoreWhenAreDifferentsAndGreatterThan4(player1Score - player2Score);
             return ScoreDefault("", player1Score, player2Score);
         }
 
@@ -60,10 +60,9 @@ namespace Tennis
             return score;
         }
 
-        private string ScoreWhenAreDifferentsAndGreatterThan4(int player1Score, int player2Score)
+        private string ScoreWhenAreDifferentsAndGreatterThan4(int minus)
         {
-            var minusResult = player1Score - player2Score;
-            switch (minusResult)
+            switch (minus)
             {
                 case -1:
                     return "Advantage player2";
