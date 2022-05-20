@@ -32,13 +32,7 @@ namespace Tennis
                 return scoreNames[player1Score] + "-" + scoreNames[player2Score];
             }
 
-            return ScoreInDouce(player1Score - player2Score);
-        }
-
-        private string ScoreInDouce(int minus)
-        {
-            switch (minus)
-            {
+            switch (difference) {
                 case -1:
                     return "Advantage player2";
                 case 1:
