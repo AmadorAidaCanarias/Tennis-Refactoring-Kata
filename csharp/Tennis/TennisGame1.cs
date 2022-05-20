@@ -20,10 +20,14 @@ namespace Tennis
     {
         public string CurrentScore(int player1Score, int player2Score)
         {
-            if (player1Score == player2Score)
+            if (player1Score == player2Score) {
                 return ScoreWhenAreEquals(player1Score);
-            if (player1Score >= 4 || player2Score >= 4)
-                return ScoreWhenAreDifferentsAndGreatterThan4(player1Score - player2Score);
+            }
+
+            if (player1Score >= 4 || player2Score >= 4) {
+                return ScoreInDouce(player1Score - player2Score);
+            }
+
             return Score(player1Score) + "-" + Score(player2Score);
         }
 
@@ -45,7 +49,7 @@ namespace Tennis
             }
         }
 
-        private string ScoreWhenAreDifferentsAndGreatterThan4(int minus)
+        private string ScoreInDouce(int minus)
         {
             switch (minus)
             {
