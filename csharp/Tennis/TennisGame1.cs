@@ -24,12 +24,13 @@ namespace Tennis
                 return ScoreWhenAreEquals(player1Score);
             if (player1Score >= 4 || player2Score >= 4)
                 return ScoreWhenAreDifferentsAndGreatterThan4(player1Score - player2Score);
-            return ScoreDefault("", player1Score, player2Score);
+            return ScoreDefault(player1Score, player2Score);
         }
 
-        private string ScoreDefault(string score, int player1Score, int player2Score)
+        private string ScoreDefault(int player1Score, int player2Score)
         {
             var tempScore = 0;
+            string score = "";
             for (var i = 1; i < 3; i++)
             {
                 if (i != 1)
