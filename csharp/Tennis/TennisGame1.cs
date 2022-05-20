@@ -21,34 +21,20 @@ namespace Tennis
         public string CurrentScore(int player1Score, int player2Score)
         {
             string[] scoreNames = {"Love", "Fifteen", "Thirty", "Forty"};
-            if (player1Score == player2Score) {
-                return ScoreWhenAreEquals(player1Score);
+
+            if (player1Score <= 3 & player2Score <= 3) { 
+                string score = scoreNames[player1Score] + "-" + ( (player1Score == player2Score) ? "All" : scoreNames[player2Score] );
+                return (score == "Forty-All") ? "Deuce" : score;
             }
 
-            if (player1Score >= 4 || player2Score >= 4) {
-                return ScoreInDouce(player1Score - player2Score);
-            }
-
-            return scoreNames[player1Score] + "-" + scoreNames[player2Score];
-        }
-
-        private string ScoreWhenAreEquals(int currentScore) {
-            switch (currentScore) {
-                case 0:
-                    return "Love-All";
-                case 1:
-                    return "Fifteen-All";
-                case 2:
-                    return "Thirty-All";
-                default:
-                    return "Deuce";
-            }
+            return ScoreInDouce(player1Score - player2Score);
         }
 
         private string ScoreInDouce(int minus)
         {
             switch (minus)
             {
+                case 0: return "Deuce";
                 case -1:
                     return "Advantage player2";
                 case 1:
