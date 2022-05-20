@@ -24,41 +24,25 @@ namespace Tennis
                 return ScoreWhenAreEquals(player1Score);
             if (player1Score >= 4 || player2Score >= 4)
                 return ScoreWhenAreDifferentsAndGreatterThan4(player1Score - player2Score);
-            return ScoreDefault(player1Score, player2Score);
+            return Score(player1Score) + "-" + Score(player2Score);
         }
 
-        private string ScoreDefault(int player1Score, int player2Score)
+        private static string Score(int tempScore)
         {
-            var tempScore = 0;
-            string score = "";
-            for (var i = 1; i < 3; i++)
+            string score = string.Empty;
+            switch (tempScore)
             {
-                if (i != 1)
-                {
-                    score += "-";
-                    tempScore = player2Score;
-                }
-                else
-                    tempScore = player1Score;
-
-                switch (tempScore)
-                {
-                    case 0:
-                        score += "Love";
-                        break;
-                    case 1:
-                        score += "Fifteen";
-                        break;
-                    case 2:
-                        score += "Thirty";
-                        break;
-                    case 3:
-                        score += "Forty";
-                        break;
-                }
+                case 0:
+                    return "Love";
+                case 1:
+                    return "Fifteen";
+                case 2:
+                    return "Thirty";
+                case 3:
+                    return "Forty";
+                default:
+                    return score;
             }
-
-            return score;
         }
 
         private string ScoreWhenAreDifferentsAndGreatterThan4(int minus)
