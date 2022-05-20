@@ -33,7 +33,6 @@ namespace Tennis
 
         private static string Score(int tempScore)
         {
-            string score = string.Empty;
             switch (tempScore)
             {
                 case 0:
@@ -45,7 +44,20 @@ namespace Tennis
                 case 3:
                     return "Forty";
                 default:
-                    return score;
+                    return string.Empty;
+            }
+        }
+
+        private string ScoreWhenAreEquals(int currentScore) {
+            switch (currentScore) {
+                case 0:
+                    return "Love-All";
+                case 1:
+                    return "Fifteen-All";
+                case 2:
+                    return "Thirty-All";
+                default:
+                    return "Deuce";
             }
         }
 
@@ -61,21 +73,6 @@ namespace Tennis
                     return "Win for player1";
                 default:
                     return "Win for player2";
-            }
-        }
-
-        private string ScoreWhenAreEquals(int currentScore)
-        {
-            switch (currentScore)
-            {
-                case 0:
-                    return "Love-All";
-                case 1:
-                    return "Fifteen-All";
-                case 2:
-                    return "Thirty-All";
-                default:
-                    return "Deuce";
             }
         }
     }
