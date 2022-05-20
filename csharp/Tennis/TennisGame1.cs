@@ -20,6 +20,7 @@ namespace Tennis
     {
         public string CurrentScore(int player1Score, int player2Score)
         {
+            string[] scoreNames = {"Love", "Fifteen", "Thirty", "Forty"};
             if (player1Score == player2Score) {
                 return ScoreWhenAreEquals(player1Score);
             }
@@ -28,24 +29,7 @@ namespace Tennis
                 return ScoreInDouce(player1Score - player2Score);
             }
 
-            return Score(player1Score) + "-" + Score(player2Score);
-        }
-
-        private static string Score(int tempScore)
-        {
-            switch (tempScore)
-            {
-                case 0:
-                    return "Love";
-                case 1:
-                    return "Fifteen";
-                case 2:
-                    return "Thirty";
-                case 3:
-                    return "Forty";
-                default:
-                    return string.Empty;
-            }
+            return scoreNames[player1Score] + "-" + scoreNames[player2Score];
         }
 
         private string ScoreWhenAreEquals(int currentScore) {
