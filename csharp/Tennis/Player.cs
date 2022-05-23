@@ -1,7 +1,7 @@
 namespace Tennis;
 
 public class Player {
-    public string Name { get; }
+    private string Name { get; }
     public int Score { private set; get; }
 
     public Player(string name, int score) {
