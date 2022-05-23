@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Tennis
 {
     public class Player
@@ -21,6 +24,7 @@ namespace Tennis
         public string CurrentScore(int player1Score, int player2Score)
         {
             string[] scoreNames = {"Love", "Fifteen", "Thirty", "Forty"};
+            Dictionary<int, string> scoreAdvantage = new() { { -1, "Advantage player2" }, { 1, "Advantage player1" } };
             int difference = (player1Score - player2Score);
 
             if (difference == 0)
@@ -32,11 +36,11 @@ namespace Tennis
                 return scoreNames[player1Score] + "-" + scoreNames[player2Score];
             }
 
+            if (scoreAdvantage.Any(x => x.Key == difference)) {
+                return scoreAdvantage[difference];
+            }
+
             switch (difference) {
-                case -1:
-                    return "Advantage player2";
-                case 1:
-                    return "Advantage player1";
                 case >= 2:
                     return "Win for player1";
                 default:
