@@ -9,9 +9,9 @@ public class Player {
         Score = score;
     }
 
-    public void IncScore(int value, string name) {
+    public void IncScore(string name) {
         if (Name == name) {
-            Score += value;
+            ++Score;
         }
     }
 }

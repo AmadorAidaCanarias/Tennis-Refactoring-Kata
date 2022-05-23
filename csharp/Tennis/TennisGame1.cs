@@ -12,8 +12,8 @@ namespace Tennis {
 
         public void WonPoint(string playerName)
         {
-            player1.IncScore(1, playerName);
-            player2.IncScore(1, playerName);
+            player1.IncScore(playerName);
+            player2.IncScore(playerName);
         }
 
         public string GetScore() {
