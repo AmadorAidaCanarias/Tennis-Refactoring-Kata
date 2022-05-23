@@ -9,9 +9,9 @@ public class ScoreBoard {
 
     public string CurrentScore(int player1Score, int player2Score) {
         int difference = (player1Score - player2Score);
-        bool twoPlayerUnderFour = player1Score < 4 && player2Score < 4;
+        bool playersUnderFour = player1Score < 4 && player2Score < 4;
 
-        if (twoPlayerUnderFour) {
+        if (playersUnderFour) {
             if (difference == 0) {
                 return (player1Score < 3) ? _scoreNames[player1Score] + "-All" : "Deuce";
             }
