@@ -1,46 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
-
 namespace Tennis {
-    public class Player {
-        public string Name { get; }
-        public int Score { private set; get; }
-
-        public Player(string name, int score) {
-            Name = name;
-            Score = score;
-        }
-
-        public void IncScore(int value, string name) {
-            if (Name == name) {
-                Score += value;
-            }
-        }
-    }
-
-    public class ScoreBoard {
-        private readonly string[] _scoreNames = new[] { "Love", "Fifteen", "Thirty", "Forty" };
-        private readonly Dictionary<int, string> _scoreAdvantage = new() { { -1, "Advantage player2" }, { 1, "Advantage player1" } };
-
-        public string CurrentScore(int player1Score, int player2Score) {
-            int difference = (player1Score - player2Score);
-
-            if (difference == 0) {
-                return (player1Score < 3) ? _scoreNames[player1Score] + "-All" : "Deuce";
-            }
-
-            if (player1Score <= 3 & player2Score <= 3) {
-                return _scoreNames[player1Score] + "-" + _scoreNames[player2Score];
-            }
-
-            if (_scoreAdvantage.Any(x => x.Key == difference)) {
-                return _scoreAdvantage[difference];
-            }
-
-            return difference >= 2 ? "Win for player1" : "Win for player2";
-        }
-    }
-
     public class TennisGame1 : ITennisGame {
         private readonly Player player1;
         private readonly Player player2;
