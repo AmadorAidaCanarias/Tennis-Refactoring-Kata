@@ -21,23 +21,24 @@ namespace Tennis
 
     public class ScoreBoard
     {
+        private readonly string[] _scoreNames = new[] {"Love", "Fifteen", "Thirty", "Forty"};
+        private readonly Dictionary<int, string> _scoreAdvantage = new() { { -1, "Advantage player2" }, { 1, "Advantage player1" } };
+
         public string CurrentScore(int player1Score, int player2Score)
         {
-            string[] scoreNames = {"Love", "Fifteen", "Thirty", "Forty"};
-            Dictionary<int, string> scoreAdvantage = new() { { -1, "Advantage player2" }, { 1, "Advantage player1" } };
             int difference = (player1Score - player2Score);
 
             if (difference == 0)
             {
-                return (player1Score < 3) ? scoreNames[player1Score] + "-All" : "Deuce";
+                return (player1Score < 3) ? _scoreNames[player1Score] + "-All" : "Deuce";
             }
 
             if (player1Score <= 3 & player2Score <= 3) { 
-                return scoreNames[player1Score] + "-" + scoreNames[player2Score];
+                return _scoreNames[player1Score] + "-" + _scoreNames[player2Score];
             }
 
-            if (scoreAdvantage.Any(x => x.Key == difference)) {
-                return scoreAdvantage[difference];
+            if (_scoreAdvantage.Any(x => x.Key == difference)) {
+                return _scoreAdvantage[difference];
             }
 
             switch (difference) {
