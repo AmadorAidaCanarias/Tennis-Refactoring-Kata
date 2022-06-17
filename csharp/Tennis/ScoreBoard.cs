@@ -10,14 +10,14 @@ public class ScoreBoard {
             return ScoreWhenTwoPlayersUnderForty(player1, player2);
         }
 
-        return ScoreWhenTwoPlayersAboveForty(player1, player2);
+        return ScoreWhenAnyPlayerAboveForty(player1, player2);
     }
 
     private static bool AreTwoScorePlayersUnderOrEqualForty(Player player1, Player player2) {
         return player1.ScoreUnderOrEqualForty() && player2.ScoreUnderOrEqualForty();
     }
 
-    private string ScoreWhenTwoPlayersAboveForty(Player player1, Player player2)
+    private string ScoreWhenAnyPlayerAboveForty(Player player1, Player player2)
     {
         if (PlayersInDeuce(player1, player2))
             return ScoreInDeuce(player1, player2);
