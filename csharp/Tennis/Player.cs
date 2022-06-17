@@ -18,7 +18,7 @@ public class Player {
     public bool ScoreUnderOrEqualForty() => Score < 4;
     public bool ScoreAboveOrEqualForty() => Score >= 3;
     public string PrettyScore() {
-        if (Score <= _scoreNames.Length) { 
+        if (Score <= _scoreNames.Length) {
             return _scoreNames[Score];
         }
 

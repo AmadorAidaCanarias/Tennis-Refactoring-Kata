@@ -17,22 +17,19 @@ public class ScoreBoard {
         return player1.ScoreUnderOrEqualForty() && player2.ScoreUnderOrEqualForty();
     }
 
-    private string ScoreWhenAnyPlayerAboveForty(Player player1, Player player2)
-    {
+    private string ScoreWhenAnyPlayerAboveForty(Player player1, Player player2) {
         if (PlayersInDeuce(player1, player2))
             return ScoreInDeuce(player1, player2);
 
         return WinnerScore(player1, player2);
     }
 
-    private static string WinnerScore(Player player1, Player player2)
-    {
+    private static string WinnerScore(Player player1, Player player2) {
         var difference = player1.Score - player2.Score;
         return $"Win for player{(difference > 0 ? 1 : 2)}";
     }
 
-    private string ScoreWhenTwoPlayersUnderForty(Player player1, Player player2)
-    {
+    private string ScoreWhenTwoPlayersUnderForty(Player player1, Player player2) {
         if (PlayersInDeuce(player1, player2)) {
             return ScoreInDeuce(player1, player2);
         }
@@ -40,8 +37,7 @@ public class ScoreBoard {
         return ScorePlayers(player1, player2);
     }
 
-    private static string ScorePlayers(Player player1, Player player2)
-    {
+    private static string ScorePlayers(Player player1, Player player2) {
         var firstScoreName = player1.PrettyScore();
         var secondScoreName = player2.PrettyScore().Replace(firstScoreName, "All");
         return firstScoreName + "-" + secondScoreName;
@@ -51,8 +47,7 @@ public class ScoreBoard {
         return _scoreInDeuce[(player1.Score - player2.Score)];
     }
 
-    private static bool PlayersInDeuce(Player player1, Player player2)
-    {
+    private static bool PlayersInDeuce(Player player1, Player player2) {
         var player2NotWin = (player1.Score - player2.Score) > -2;
         var player1NotWin = (player1.Score - player2.Score) < 2;
         var scoresAboveOrEqualForty = player1.ScoreAboveOrEqualForty() && player2.ScoreAboveOrEqualForty();
