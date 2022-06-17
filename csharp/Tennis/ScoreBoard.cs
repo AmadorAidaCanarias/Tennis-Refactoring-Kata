@@ -1,27 +1,61 @@
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Tennis;
 
 public class ScoreBoard {
-    private readonly string[] _scoreNames = new[] { "Love", "Fifteen", "Thirty", "Forty" };
-    private readonly Dictionary<int, string> _scoreInDeuce = new() { { -1, "Advantage player2" }, { 0, "Deuce"}, { 1, "Advantage player1" } };
+    private readonly Dictionary<int, string> _scoreInDeuce = new() { { -1, "Advantage player2" }, { 0, "Deuce" }, { 1, "Advantage player1" } };
 
-    public string CurrentScore(int player1Score, int player2Score) {
-        int difference = (player1Score - player2Score);
-        bool playersUnderFour = player1Score < 4 && player2Score < 4;
-
-        if (playersUnderFour) {
-            if (difference == 0) {
-                return (player1Score < 3) ? _scoreNames[player1Score] + "-All" : "Deuce";
-            }
-            return _scoreNames[player1Score] + "-" + _scoreNames[player2Score];
+    public string CurrentScore(Player player1, Player player2) {
+        if (AreTwoScorePlayersUnderOrEqualForty(player1, player2)) {
+            return ScoreWhenTwoPlayersUnderForty(player1, player2);
         }
 
-        if (_scoreInDeuce.Any(x => x.Key == difference)) {
-            return _scoreInDeuce[difference];
+        return ScoreWhenTwoPlayersAboveForty(player1, player2);
+    }
+
+    private static bool AreTwoScorePlayersUnderOrEqualForty(Player player1, Player player2) {
+        return player1.ScoreUnderOrEqualForty() && player2.ScoreUnderOrEqualForty();
+    }
+
+    private string ScoreWhenTwoPlayersAboveForty(Player player1, Player player2)
+    {
+        if (PlayersInDeuce(player1, player2))
+            return ScoreInDeuce(player1, player2);
+
+        return WinnerScore(player1, player2);
+    }
+
+    private static string WinnerScore(Player player1, Player player2)
+    {
+        var difference = player1.Score - player2.Score;
+        return $"Win for player{(difference > 0 ? 1 : 2)}";
+    }
+
+    private string ScoreWhenTwoPlayersUnderForty(Player player1, Player player2)
+    {
+        if (PlayersInDeuce(player1, player2)) {
+            return ScoreInDeuce(player1, player2);
         }
 
-        return difference > 0 ? "Win for player1" : "Win for player2";
+        return ScorePlayers(player1, player2);
+    }
+
+    private static string ScorePlayers(Player player1, Player player2)
+    {
+        var firstScoreName = player1.PrettyScore();
+        var secondScoreName = player2.PrettyScore().Replace(firstScoreName, "All");
+        return firstScoreName + "-" + secondScoreName;
+    }
+
+    private string ScoreInDeuce(Player player1, Player player2) {
+        return _scoreInDeuce[(player1.Score - player2.Score)];
+    }
+
+    private static bool PlayersInDeuce(Player player1, Player player2)
+    {
+        var player2NotWin = (player1.Score - player2.Score) > -2;
+        var player1NotWin = (player1.Score - player2.Score) < 2;
+        var scoresAboveOrEqualForty = player1.ScoreAboveOrEqualForty() && player2.ScoreAboveOrEqualForty();
+        return player2NotWin && player1NotWin && scoresAboveOrEqualForty;
     }
 }

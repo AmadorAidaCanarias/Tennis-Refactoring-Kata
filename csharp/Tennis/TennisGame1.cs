@@ -5,19 +5,22 @@ namespace Tennis {
         private readonly ScoreBoard scoreBoard;
 
         public TennisGame1(string player1Name, string player2Name) {
-            player1 = new Player(player1Name, 0);
-            player2 = new Player(player2Name, 0);
+            player1 = new Player(player1Name);
+            player2 = new Player(player2Name);
             scoreBoard = new ScoreBoard();
         }
 
-        public void WonPoint(string playerName)
-        {
-            player1.IncScore(playerName);
-            player2.IncScore(playerName);
+        public void WonPoint(string playerName) {
+            if (player1.DidYouWinPoint(playerName)) {
+                player1.Register();
+            }
+            else {
+                player2.Register();
+            }
         }
 
         public string GetScore() {
-            return scoreBoard.CurrentScore(player1.Score, player2.Score);
+            return scoreBoard.CurrentScore(player1, player2);
         }
     }
 }
